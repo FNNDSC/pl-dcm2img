@@ -8,9 +8,9 @@
 # Step 1. Change these values to your liking.
 
 PLUGIN_NAME="$(basename $(dirname $(realpath $0)))"
-PLUGIN_TITLE='My ChRIS Plugin'
-SCRIPT_NAME='commandname'
-DESCRIPTION='A ChRIS plugin to do something awesome'
+PLUGIN_TITLE='DCM-2-IMG'
+SCRIPT_NAME='dcm2img'
+DESCRIPTION='A ChRIS plugin that converts medical images (typically DICOM) to more friendly JPG/PNG format.'
 ORGANIZATION='FNNDSC'
 EMAIL='dev@babyMRI.org'
 
@@ -20,7 +20,7 @@ ENABLE_CI=yes
 
 # Step 2. Uncomment the line below.
 
-#READY=yes
+READY=yes
 
 # Step 3. Run: ./bootstrap.sh
 
