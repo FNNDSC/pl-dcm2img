@@ -4,10 +4,10 @@
 FROM docker.io/python:3.10.2-slim-buster
 
 LABEL org.opencontainers.image.authors="FNNDSC <dev@babyMRI.org>" \
-      org.opencontainers.image.title="ChRIS Plugin Title" \
-      org.opencontainers.image.description="A ChRIS plugin that..."
+      org.opencontainers.image.title="DCM-2-IMG" \
+      org.opencontainers.image.description="A ChRIS plugin that converts medical images (typically DICOM) to more friendly JPG/PNG format."
 
-WORKDIR /usr/local/src/app
+WORKDIR /usr/local/src/pl-dcm2img
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN pip install .
 
-CMD ["commandname", "--help"]
+CMD ["dcm2img", "--help"]

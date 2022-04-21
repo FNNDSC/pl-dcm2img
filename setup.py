@@ -1,19 +1,19 @@
 from setuptools import setup
 
 setup(
-    name='chris-plugin-template',
+    name='dcm2img',
     version='1.0.0',
-    description='A ChRIS DS plugin template',
+    description='A ChRIS plugin that converts medical images (typically DICOM) to more friendly JPG/PNG format.',
     author='FNNDSC',
     author_email='dev@babyMRI.org',
-    url='https://github.com/FNNDSC/python-chrisapp-template',
-    py_modules=['app'],
+    url='https://github.com/rudolphpienaar/pl-dcm2img',
+    py_modules=['dcm2img'],
     install_requires=['chris_plugin'],
     license='MIT',
     python_requires='>=3.8.2',
     entry_points={
         'console_scripts': [
-            'commandname = app:main'
+            'dcm2img = dcm2img:main'
         ]
     },
     classifiers=[
