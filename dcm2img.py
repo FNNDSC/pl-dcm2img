@@ -34,6 +34,7 @@ friendly JPG/PNG format. This plugin is closely related to ``pl-med2img``
 and supports all the same arguments; however here the code uses a more
 intelligent mapper/filter to allow for trivial in-plugin parallelization.
 ''', formatter_class=ArgumentDefaultsHelpFormatter)
+
 parser.add_argument('-V', '--version',
                     action      = 'version',
                     version     = f'$(prog)s {__version__}'
@@ -112,11 +113,21 @@ parser.add_argument("--glob",
                     default     = '**/',
                     dest        = 'glob'
                 )
+parser.add_argument('--rot',
+                    help    = "3D slice/dimenstion rotation vector",
+                    dest    = 'rot',
+                    default = "110"
+                )
+parser.add_argument('--rotAngle',
+                    help    = "3D slice/dimenstion rotation angle",
+                    dest    = 'rotAngle',
+                    default = "90"
+                )
 
 # documentation: https://fnndsc.github.io/chris_plugin/chris_plugin.html#chris_plugin
 @chris_plugin(
     parser              = parser,
-    title               = 'DCM-2-IMG',
+    title               = 'pl-dcm2img',
     category            = 'Image conversion',       # ref. https://chrisstore.co/plugins
     min_memory_limit    = '100Mi',                  # supported units: Mi, Gi
     min_cpu_limit       = '1000m',                  # millicores, e.g. "1000m" = 1 CPU core
@@ -136,14 +147,14 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
 
     for input, output in mapper:
         os.chdir('/' + inputdir.name)
-        str_cwd             = os.getcwd()
         options.inputDir    = '/' + inputdir.name   + '/' + input.name
         options.outputDir   = '/' + outputdir.name  + '/' + output.name
         imgConverter        = med2image.object_factoryCreate(options).C_convert
-        imgConverter.tic()
-        imgConverter.run()
-        if options.printElapsedTime:
-            print("Elapsed time = %f seconds" % imgConverter.toc())
+        if imgConverter:
+            imgConverter.tic()
+            imgConverter.run()
+            if options.printElapsedTime:
+                print("Elapsed time = %f seconds" % imgConverter.toc())
 
 if __name__ == '__main__':
     main()

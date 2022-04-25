@@ -1,21 +1,20 @@
-# DCM-2-IMG
+# pl-dcm2img
 
 [![Version](https://img.shields.io/docker/v/fnndsc/pl-dcm2img?sort=semver)](https://hub.docker.com/r/fnndsc/pl-dcm2img)
 [![MIT License](https://img.shields.io/github/license/fnndsc/pl-dcm2img)](https://github.com/FNNDSC/pl-dcm2img/blob/main/LICENSE)
 [![ci](https://github.com/FNNDSC/pl-dcm2img/actions/workflows/ci.yml/badge.svg)](https://github.com/FNNDSC/pl-dcm2img/actions/workflows/ci.yml)
 
 `pl-dcm2img` is a [_ChRIS_](https://chrisproject.org/)
-_ds_ plugin which takes in ...  as input files and
-creates ... as output files.
+_ds_ plugin which searches for medical image files (typically DICOM or NIfTI) in its input dir (tree) and converts these files to more image friendly formats like `png` or `jpg` in its output (tree).
 
 ## Abstract
 
-...
+`pl-dcm2img` is a ChRIS DS plugin around a `med2image` [module](https://https://github.com/FNNDSC/med2image). The plugin will search for any files in its input tree space (do all directories and subdirectories within its `inputdir`) that conform to a simple substring filter (usually a file extension such as `dcm` or `nii`) and convert these to `jpg` or `png` format.
 
 ## Installation
 
 `pl-dcm2img` is a _[ChRIS](https://chrisproject.org/) plugin_, meaning it can
-run from either within _ChRIS_ or the command-line.
+run from either within _ChRIS_ or the command-line. The recommended usage is to install and run the containerized version of the program.
 
 [![Get it from chrisstore.co](https://ipfs.babymri.org/ipfs/QmaQM9dUAYFjLVn3PpNTrpbKVavvSTxNLE5BocRCW1UoXG/light.png)](https://chrisstore.co/plugin/pl-dcm2img)
 
