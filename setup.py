@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='dcm2img',
-    version='1.0.0',
+    version='1.0.2',
     description='A ChRIS plugin that converts medical images (typically DICOM) to more friendly JPG/PNG format.',
     author='FNNDSC',
     author_email='dev@babyMRI.org',
