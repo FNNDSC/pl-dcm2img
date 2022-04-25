@@ -1,5 +1,5 @@
 # Continuous integration testing for ChRIS Plugin.
-# https://github.com/FNNDSC/cookiecutter-chrisapp/wiki/Automatic-Builds
+# https://github.com/FNNDSC/cookiecutter-chrisdcm2img/wiki/Automatic-Builds
 #
 # - automatically run pytest
 # - on push to main, build and push container images as ":latest"
@@ -36,17 +36,17 @@ jobs:
           context: .
           load: true
           push: false
-          tags: "localhost/local/app:latest"
+          tags: "localhost/local/dcm2img:latest"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Install testing dependencies
         run:
-          docker run --name=install_test localhost/local/app:latest pip install pytest
-          docker commit install_test localhost/local/app:tester
+          docker run --name=install_test localhost/local/dcm2img:latest pip install pytest
+          docker commit install_test localhost/local/dcm2img:tester
           docker rm install_test
       - name: Run pytest
         run: |
-          docker run -v "$GITHUB_WORKSPACE:/app:ro" -w /app localhost/local/app:tester \
+          docker run -v "$GITHUB_WORKSPACE:/dcm2img:ro" -w /dcm2img localhost/local/dcm2img:tester \
             pytest -o cache_dir=/tmp/pytest
 
   build:
