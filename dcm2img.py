@@ -33,6 +33,7 @@ A ChRIS plugin that converts medical images (typically DICOM) to more
 friendly JPG/PNG format. This plugin is closely related to ``pl-med2img``
 and supports all the same arguments; however here the code uses a more
 intelligent mapper/filter to allow for trivial in-plugin parallelization.
+For more information, see https://github.com/FNNDSC/pl-dcm2img
 ''', formatter_class=ArgumentDefaultsHelpFormatter)
 
 parser.add_argument('-V', '--version',
@@ -47,7 +48,8 @@ parser.add_argument('-i', '--inputFile',
 parser.add_argument("--inputFileSubStr",
                     help        = "input file substring to tag a file in the inputDir",
                     dest        = 'inputFileSubStr',
-                    default     = '')
+                    default     = ''
+                )
 parser.add_argument('-o', '--outputFileStem',
                     dest        = 'outputFileStem',
                     help        = 'output file stem name (with optional extension)',
@@ -78,7 +80,7 @@ parser.add_argument('-r', '--reslice',
                     dest        = 'reslice',
                     action      = 'store_true',
                     default     = False,
-                    help        = 'save images along i, j, k direction -- 3D input only'
+                    help        = 'save images along x, y, z directions -- 3D input only'
                 )
 parser.add_argument('--showSlices',
                     dest        = 'showSlices',
