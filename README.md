@@ -9,7 +9,7 @@ _ds_ plugin which searches for medical image files (typically DICOM or NIfTI) in
 
 ## Abstract
 
-`pl-dcm2img` is a ChRIS DS plugin around a `med2image` [module](https://https://github.com/FNNDSC/med2image). The plugin will search for any files in its input tree space (do all directories and subdirectories within its `inputdir`) that conform to a simple substring filter (usually a file extension such as `dcm` or `nii`) and convert these to `jpg` or `png` format.
+`pl-dcm2img` is a ChRIS DS plugin around a `med2image` [module](https://github.com/FNNDSC/med2image). The plugin will search for any files in its input tree space (do all directories and subdirectories within its `inputdir`) that conform to a simple substring filter (usually a file extension such as `dcm` or `nii`) and convert these to `jpg` or `png` format.
 
 ## Installation
 
