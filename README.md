@@ -106,6 +106,12 @@ The complete argument list is:
         the named file. By default the script assumes that multiple DICOMS
         should be converted en mass otherwise.
 
+        [--preserveDICOMinputName]
+        If specified, use the input DICOM name as the stem of the output
+        filename, with the specified type ('jpg' or 'png') as the extension.
+        In the case where [--reslice] is additionally specified, only the
+        slice or 'z' direction will preserve original DICOM names.
+
         [-t|--outputFileType <outputFileType>]
         The output file type. If different to <outputFileStem> extension,
         will override extension in favour of <outputFileType>.

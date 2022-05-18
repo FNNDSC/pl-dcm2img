@@ -105,6 +105,12 @@ parser.add_argument("--convertOnlySingleDICOM",
                     action      = 'store_true',
                     default     = False
 )
+parser.add_argument("--preserveDICOMinputName",
+                    help    = "if specified, save output files with the basename of their input DICOM",
+                    dest    = 'preserveDICOMinputName',
+                    action  = 'store_true',
+                    default = False
+                )
 parser.add_argument("--verbosity",
                     help        = "verbosity level",
                     default     = '1',
