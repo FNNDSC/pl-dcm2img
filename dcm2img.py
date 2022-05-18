@@ -8,9 +8,11 @@ from    importlib.metadata  import Distribution
 from    chris_plugin        import chris_plugin, PathMapper
 
 from    med2image           import med2image
-import  pudb
+# import  pudb
 
 import  os
+import  copy
+from    typing              import Iterator
 
 __pkg = Distribution.from_name(__package__)
 __version__ = __pkg.version
@@ -105,6 +107,12 @@ parser.add_argument("--convertOnlySingleDICOM",
                     action      = 'store_true',
                     default     = False
 )
+parser.add_argument("--preserveDICOMinputName",
+                    help    = "if specified, save output files with the basename of their input DICOM",
+                    dest    = 'preserveDICOMinputName',
+                    action  = 'store_true',
+                    default = False
+                )
 parser.add_argument("--verbosity",
                     help        = "verbosity level",
                     default     = '1',
@@ -143,20 +151,34 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
         print("%25s:  [%s]" % (k, v))
     print("")
 
-    pudb.set_trace()
+    # pudb.set_trace()
 
-    mapper      = PathMapper(inputdir, outputdir, glob='*/**/', only_files = False)
+    mapper      = map_over_dirs(options, inputdir, outputdir)
 
-    for input, output in mapper:
-        os.chdir('/' + inputdir.name)
-        options.inputDir    = '/' + inputdir.name   + '/' + input.name
-        options.outputDir   = '/' + outputdir.name  + '/' + output.name
+    for options in mapper:
         imgConverter        = med2image.object_factoryCreate(options).C_convert
         if imgConverter:
             imgConverter.tic()
             imgConverter.run()
             if options.printElapsedTime:
                 print("Elapsed time = %f seconds" % imgConverter.toc())
+
+
+def map_over_dirs(options: Namespace, input_dir: Path, output_dir: Path) -> Iterator[Namespace]:
+    """
+    Generate objects conforming to ``med2image.object_factoryCreate``'s protocol for each
+    series inside the input directory.
+
+    :param options: options passed to a ``@chris_plugin``-decorated main function
+    :return: generator of parameter objects
+    """
+    mapper = PathMapper.dir_mapper_deep(input_dir, output_dir)
+    for input_dir, output_dir in mapper:
+        series_options = copy.copy(options)
+        series_options.inputDir = str(input_dir)
+        series_options.outputDir = str(output_dir)
+        yield series_options
+
 
 if __name__ == '__main__':
     main()
